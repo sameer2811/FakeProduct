@@ -35,4 +35,9 @@ public class ProductController {
     List<Product> findByCategory(@RequestParam(value = "categoryName") String categoryName, @RequestParam(value = "quantity", required = false) Integer quantity) {
         return productService.findByCategory(categoryName);
     }
+
+    @GetMapping("/distinct")
+    List<String> findAllDistinctCategory() {
+        return productService.findAllDistinctCategory();
+    }
 }
