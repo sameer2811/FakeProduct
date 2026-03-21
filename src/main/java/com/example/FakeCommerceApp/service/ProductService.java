@@ -1,0 +1,38 @@
+package com.example.FakeCommerceApp.service;
+
+import com.example.FakeCommerceApp.DTO.ProductDto;
+import com.example.FakeCommerceApp.repository.ProductRepository;
+import com.example.FakeCommerceApp.schema.Product;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("No value present"));
+    }
+
+    public Product create(ProductDto productDto) {
+        Product product = Product.builder().id(productDto.getId()).name(productDto.getName()).price(productDto.getPrice()).category(productDto.getCategory()).description(productDto.getDescription()).quantity(productDto.getQuantity()).build();
+        return productRepository.save(product);
+    }
+
+    public void delete(Long productId) {
+        productRepository.deleteById(productId);
+    }
+
+    public List<Product> findByCategory(String category) {
+        return productRepository.findProductByCategory(category);
+    }
+}
