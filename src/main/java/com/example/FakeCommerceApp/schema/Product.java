@@ -27,7 +27,10 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
     private int quantity;
 
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }

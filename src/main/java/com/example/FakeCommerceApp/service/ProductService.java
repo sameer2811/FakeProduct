@@ -24,7 +24,12 @@ public class ProductService {
     }
 
     public Product create(ProductDto productDto) {
-        Product product = Product.builder().id(productDto.getId()).name(productDto.getName()).price(productDto.getPrice()).category(productDto.getCategory()).description(productDto.getDescription()).quantity(productDto.getQuantity()).build();
+        Product product = Product.builder()
+                .id(productDto.getId())
+                .name(productDto.getName())
+                .price(productDto.getPrice())
+                //.category(productDto.getCategory())
+                .description(productDto.getDescription()).quantity(productDto.getQuantity()).build();
         return productRepository.save(product);
     }
 
