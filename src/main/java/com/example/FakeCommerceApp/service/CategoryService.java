@@ -19,6 +19,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Category findById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("No value present"));
+    }
+
     public Category create(CategoryDto categoryDto) {
         Category category = Category.builder()
                 .name(categoryDto.getName())

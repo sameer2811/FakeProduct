@@ -2,6 +2,7 @@ package com.example.FakeCommerceApp.service;
 
 import com.example.FakeCommerceApp.DTO.ProductDto;
 import com.example.FakeCommerceApp.repository.ProductRepository;
+import com.example.FakeCommerceApp.schema.Category;
 import com.example.FakeCommerceApp.schema.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     public List<Product> findAll() {
         return productRepository.findAll();
@@ -24,12 +26,16 @@ public class ProductService {
     }
 
     public Product create(ProductDto productDto) {
+
+        Category category = categoryService.findById(productDto.getCategoryId());
         Product product = Product.builder()
                 .id(productDto.getId())
                 .name(productDto.getName())
                 .price(productDto.getPrice())
-                //.category(productDto.getCategory())
-                .description(productDto.getDescription()).quantity(productDto.getQuantity()).build();
+                .category(category)
+                .description(productDto.getDescription())
+                .quantity(productDto.getQuantity())
+                .build();
         return productRepository.save(product);
     }
 
