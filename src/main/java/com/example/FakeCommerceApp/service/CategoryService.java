@@ -21,7 +21,6 @@ public class CategoryService {
 
     public Category create(CategoryDto categoryDto) {
         Category category = Category.builder()
-                .id(categoryDto.getId())
                 .name(categoryDto.getName())
                 .build();
         return categoryRepository.save(category);
