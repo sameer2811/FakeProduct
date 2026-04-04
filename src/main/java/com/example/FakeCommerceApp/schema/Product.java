@@ -13,7 +13,8 @@ import java.math.BigDecimal;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product extends BaseEntity{
+@Table(name = "products")
+public class Product extends BaseEntity {
 
     @Column(nullable = false)
     private String name;

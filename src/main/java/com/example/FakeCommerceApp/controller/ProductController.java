@@ -1,6 +1,7 @@
 package com.example.FakeCommerceApp.controller;
 
 import com.example.FakeCommerceApp.DTO.ProductDto;
+import com.example.FakeCommerceApp.DTO.GetCompleteProductResponseDetailsDto;
 import com.example.FakeCommerceApp.DTO.GetProductResponseDto;
 import com.example.FakeCommerceApp.schema.Product;
 import com.example.FakeCommerceApp.service.ProductService;
@@ -62,8 +63,13 @@ public class ProductController {
     // This method is used to find a product by its id
     // on calling this method the product will be fetched
     // the call to fetch the category will be there since the return type is Product
-    // hence there is no benifit of lazy loading here.
+    // hence there is no benefit of lazy loading here.
     Product findById(@PathVariable("prodId") Long productId) {
         return productService.findById(productId);
+    }
+
+    @GetMapping("/{prodId}/details")
+    GetCompleteProductResponseDetailsDto findCompleteProductDetails(@PathVariable("prodId") Long productId) {
+        return productService.findCompleteProductDetails(productId);
     }
 }

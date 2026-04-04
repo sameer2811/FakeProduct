@@ -1,5 +1,6 @@
 package com.example.FakeCommerceApp.service;
 
+import com.example.FakeCommerceApp.DTO.GetCompleteProductResponseDetailsDto;
 import com.example.FakeCommerceApp.DTO.ProductDto;
 import com.example.FakeCommerceApp.repository.ProductRepository;
 import com.example.FakeCommerceApp.schema.Category;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +51,21 @@ public class ProductService {
 
     public List<Product> findByCategory(String category) {
         return productRepository.findProductByCategory(category);
+    }
+
+    public GetCompleteProductResponseDetailsDto findCompleteProductDetails(Long productId) {
+        Optional<Product> product = productRepository.findProductByCompleteDetails(productId);
+        if (product.isPresent()) {
+            Product productEntity = product.get();
+            return GetCompleteProductResponseDetailsDto.builder()
+                    .id(productEntity.getId())
+                    .name(productEntity.getName())
+                    .description(productEntity.getDescription())
+                    .price(productEntity.getPrice())
+                    .quantity(productEntity.getQuantity())
+                    .categoryName(productEntity.getCategory().getName())
+                    .build();
+        }
+        return null;
     }
 }
