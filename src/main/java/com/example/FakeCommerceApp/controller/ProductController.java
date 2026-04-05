@@ -3,9 +3,12 @@ package com.example.FakeCommerceApp.controller;
 import com.example.FakeCommerceApp.DTO.ProductDto;
 import com.example.FakeCommerceApp.DTO.GetCompleteProductResponseDetailsDto;
 import com.example.FakeCommerceApp.DTO.GetProductResponseDto;
+import com.example.FakeCommerceApp.DTO.NotFindDto;
 import com.example.FakeCommerceApp.schema.Product;
 import com.example.FakeCommerceApp.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

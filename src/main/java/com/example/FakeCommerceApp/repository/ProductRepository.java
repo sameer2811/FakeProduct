@@ -3,6 +3,7 @@ package com.example.FakeCommerceApp.repository;
 import com.example.FakeCommerceApp.schema.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<String> findDistinctCategoryBy();
 
     @Query("select p from Product p join fetch p.category where p.id = :productId")
-    Optional<Product> findProductByCompleteDetails(Long productId);
+    Optional<Product> findProductByCompleteDetails(@Param("productId") Long productId);
 }
