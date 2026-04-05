@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS reviews (
+    id BIGINT AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    comment TEXT NOT NULL,
+    rating INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);

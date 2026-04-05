@@ -31,7 +31,7 @@ public class Product extends BaseEntity {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private int quantity;
+    private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
