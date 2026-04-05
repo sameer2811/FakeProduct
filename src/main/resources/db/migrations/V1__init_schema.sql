@@ -1,0 +1,44 @@
+CREATE TABLE IF NOT EXISTS categories (
+    id BIGINT AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS products (
+    id BIGINT AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    quantity INT NOT NULL,
+    category_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT AUTO_INCREMENT,
+    order_status VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS order_products (
+    id BIGINT AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
