@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/category")
 @RequiredArgsConstructor
-public class categoryController {
+public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
