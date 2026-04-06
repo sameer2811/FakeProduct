@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FakeCommerceApp.DTO.GetReviewDto;
 import com.example.FakeCommerceApp.DTO.GetReviewResponseDto;
 import com.example.FakeCommerceApp.schema.Review;
 import com.example.FakeCommerceApp.service.ReviewService;
@@ -35,7 +36,7 @@ public class ReviewController {
     }
 
     @PostMapping
-    public Review createReview(@RequestBody Review review) {
+    public Review createReview(@RequestBody GetReviewDto review) {
         if(review.getRating() < 1 || review.getRating() > 5) {
             throw new RuntimeException("Rating must be between 1 and 5");
         }
