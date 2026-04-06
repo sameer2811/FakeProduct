@@ -36,6 +36,12 @@ public class ReviewController {
 
     @PostMapping
     public Review createReview(@RequestBody Review review) {
+        if(review.getRating() < 1 || review.getRating() > 5) {
+            throw new RuntimeException("Rating must be between 1 and 5");
+        }
+        if(review.getComment().isEmpty()) {
+            throw new RuntimeException("Comment is required");
+        }
         return reviewService.createReview(review);
     }
 

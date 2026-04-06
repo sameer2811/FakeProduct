@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.FakeCommerceApp.DTO.GetReviewDto;
+import com.example.FakeCommerceApp.repository.ProductRepository;
 import com.example.FakeCommerceApp.repository.ReviewRepository;
+import com.example.FakeCommerceApp.schema.Product;
 import com.example.FakeCommerceApp.schema.Review;
 
 import lombok.AllArgsConstructor;
@@ -13,13 +16,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
-
+    private final ProductRepository productRepository;
 
     public List<Review> findAll() {
         return reviewRepository.findAll();
     }
 
-    public Review createReview(Review review) {
+    public Review createReview(GetReviewDto reviewDto) {
+        Product product = productRepository.findById(reviewDto.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Review review = Review.builder()
+                .comment(reviewDto.getComment())
+                .rating(reviewDto.getRating())
+                .product(product)
+                .build();
         return reviewRepository.save(review);
     }
 
